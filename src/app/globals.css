@@ -58,3 +58,27 @@ body {
 .btn-secondary {
   @apply bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg;
 }
+
+/* 광고 배너 스타일 */
+.ad-banner-container {
+  width: 160px;
+  height: 600px;
+  background: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ad-banner-left,
+.ad-banner-right {
+  width: 160px;
+  height: 600px;
+}
+
+/* 광고 영역 표시 */
+ins.kakao_ad_area {
+  display: block !important;
+  width: 160px !important;
+  height: 600px !important;
+}

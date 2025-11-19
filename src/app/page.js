@@ -61,6 +61,35 @@ export default function Home() {
     if (savedHistory) {
       setUserHistory(JSON.parse(savedHistory))
     }
+
+    // 카카오 광고 초기화
+    const initKakaoAd = () => {
+      if (typeof window !== 'undefined') {
+        // 스크립트 로드 확인
+        const script = document.querySelector('script[src*="kas/static/ba.min.js"]')
+        if (script && window.adfit) {
+          try {
+            console.log('카카오 광고 초기화 시도...')
+            window.adfit.init()
+            console.log('카카오 광고 초기화 성공!')
+          } catch (error) {
+            console.error('광고 초기화 실패:', error)
+          }
+        } else {
+          console.log('광고 스크립트 대기 중...')
+        }
+      }
+    }
+
+    // 여러 번 시도
+    const timers = [
+      setTimeout(initKakaoAd, 100),
+      setTimeout(initKakaoAd, 500),
+      setTimeout(initKakaoAd, 1000),
+      setTimeout(initKakaoAd, 2000)
+    ]
+
+    return () => timers.forEach(timer => clearTimeout(timer))
   }, [])
 
   useEffect(() => {
@@ -213,7 +242,34 @@ export default function Home() {
   }
 
   return (
-    <div className="p-4 md:p-8">
+    <div className="relative">
+      {/* 왼쪽 광고 배너 */}
+      <div className="hidden xl:block fixed left-4 top-1/2 -translate-y-1/2 z-40">
+        <div className="ad-banner-container">
+          <ins 
+            className="kakao_ad_area" 
+            style={{ display: 'block' }}
+            data-ad-unit="DAN-UmVYiwpB3XdA0Wtn"
+            data-ad-width="160"
+            data-ad-height="600"
+          />
+        </div>
+      </div>
+
+      {/* 오른쪽 광고 배너 */}
+      <div className="hidden xl:block fixed right-4 top-1/2 -translate-y-1/2 z-40">
+        <div className="ad-banner-container">
+          <ins 
+            className="kakao_ad_area" 
+            style={{ display: 'block' }}
+            data-ad-unit="DAN-PHh0P4Qi2kvvP4M4"
+            data-ad-width="160"
+            data-ad-height="600"
+          />
+        </div>
+      </div>
+
+      <div className="p-4 md:p-8">
       {/* 헤더 */}
       <header className="text-center mb-12 animate-fadeIn">
         <div className="text-6xl md:text-7xl mb-4">🍽️</div>
@@ -498,6 +554,7 @@ export default function Home() {
         </div>
         <p className="text-xs text-gray-400">© 2025 WJ Co. All rights reserved.</p>
       </footer>
+      </div>
     </div>
   )
 }
