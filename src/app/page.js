@@ -61,6 +61,21 @@ export default function Home() {
     if (savedHistory) {
       setUserHistory(JSON.parse(savedHistory))
     }
+
+    // 카카오 광고 초기화
+    const initKakaoAd = () => {
+      if (typeof window !== 'undefined' && window.adfit) {
+        try {
+          window.adfit.init()
+        } catch (error) {
+          console.error('광고 초기화 실패:', error)
+        }
+      }
+    }
+
+    // 스크립트 로드 후 초기화
+    const timer = setTimeout(initKakaoAd, 500)
+    return () => clearTimeout(timer)
   }, [])
 
   useEffect(() => {
@@ -488,6 +503,19 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* 하단 광고 배너 */}
+      <div className="max-w-4xl mx-auto mb-8">
+        <div className="flex justify-center">
+          <ins 
+            className="kakao_ad_area" 
+            style={{ display: 'none' }}
+            data-ad-unit="DAN-guy3kYiHqYjiO3b6"
+            data-ad-width="728"
+            data-ad-height="90"
+          />
+        </div>
+      </div>
 
       {/* 푸터 */}
       <footer className="text-center mt-16 py-8 border-t border-gray-200">
