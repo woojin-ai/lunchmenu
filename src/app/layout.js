@@ -1,7 +1,6 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
-import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,11 +15,6 @@ export default function RootLayout({ children }) {
     <html lang="ko">
       <head>
         <meta name="naver-site-verification" content="4f1f97e8cd289c7eed2ae482c648ba2dd6bbb09" />
-        <Script
-          src="//t1.daumcdn.net/kas/static/ba.min.js"
-          strategy="afterInteractive"
-          async
-        />
       </head>
       <body className={inter.className}>
         <div className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50">
