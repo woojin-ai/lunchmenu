@@ -213,7 +213,30 @@ export default function Home() {
   }
 
   return (
-    <div className="p-4 md:p-8">
+    <div className="relative">
+      {/* 왼쪽 세로 광고 */}
+      <div className="hidden xl:block fixed left-4 top-1/2 -translate-y-1/2 z-40">
+        <ins 
+          className="kakao_ad_area" 
+          style={{ display: 'block' }}
+          data-ad-unit="DAN-UmVYiwpB3XdA0Wtn"
+          data-ad-width="160"
+          data-ad-height="600"
+        />
+      </div>
+
+      {/* 오른쪽 세로 광고 */}
+      <div className="hidden xl:block fixed right-4 top-1/2 -translate-y-1/2 z-40">
+        <ins 
+          className="kakao_ad_area" 
+          style={{ display: 'block' }}
+          data-ad-unit="DAN-PHh0P4Qi2kvvP4M4"
+          data-ad-width="160"
+          data-ad-height="600"
+        />
+      </div>
+
+      <div className="p-4 md:p-8">
       {/* 헤더 */}
       <header className="text-center mb-12 animate-fadeIn">
         <div className="text-6xl md:text-7xl mb-4">🍽️</div>
@@ -489,28 +512,28 @@ export default function Home() {
         </div>
       )}
 
-      {/* 하단 광고 배너 */}
-      <div className="max-w-4xl mx-auto mb-8">
-        <div className="flex justify-center">
-          <ins 
-            className="kakao_ad_area" 
-            style={{ display: 'block' }}
-            data-ad-unit="DAN-guy3kYiHqYjiO3b6"
-            data-ad-width="728"
-            data-ad-height="90"
-          />
-        </div>
-      </div>
-
       {/* 푸터 */}
       <footer className="text-center mt-16 py-8 border-t border-gray-200">
-        <p className="text-gray-600 mb-4">매일 고민되는 점심 메뉴, 이제 걱정 끝!</p>
+        {/* 하단 광고 배너 */}
+        <div className="max-w-4xl mx-auto mb-6">
+          <div className="flex justify-center">
+            <ins 
+              className="kakao_ad_area" 
+              style={{ display: 'block' }}
+              data-ad-unit="DAN-guy3kYiHqYjiO3b6"
+              data-ad-width="728"
+              data-ad-height="90"
+            />
+          </div>
+        </div>
+
         <div className="flex items-center justify-center gap-2 text-gray-500 text-sm mb-2">
           <span className="text-lg">🌟</span>
           <span className="font-semibold">Made by WJ Co.</span>
         </div>
         <p className="text-xs text-gray-400">© 2025 WJ Co. All rights reserved.</p>
       </footer>
+      </div>
     </div>
   )
 }
