@@ -26,31 +26,42 @@ export default function Home() {
     }, 100)
   }
 
+  // 위치 가져오는 공통 함수 (정확도 옵션 포함)
+  const getAccurateLocation = () => {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject(new Error('Geolocation 미지원'))
+        return
+      }
+      navigator.geolocation.getCurrentPosition(
+        (position) => resolve(position),
+        (error) => reject(error),
+        {
+          enableHighAccuracy: true,  // GPS 우선 사용
+          timeout: 10000,            // 10초 대기
+          maximumAge: 0              // 캐시 사용 안 함 (항상 새로 측정)
+        }
+      )
+    })
+  }
+
   useEffect(() => {
     async function fetchWeatherData() {
       try {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            async (position) => {
-              const { latitude, longitude } = position.coords
-              setUserLocation({ lat: latitude, lon: longitude })
+        const position = await getAccurateLocation()
+        const { latitude, longitude } = position.coords
+        setUserLocation({ lat: latitude, lon: longitude })
+        console.log('📍 측정된 좌표:', latitude, longitude)
 
-              const response = await fetch(
-                `/api/weather?lat=${latitude}&lon=${longitude}`
-              )
-              const data = await response.json()
-              
-              setWeather(data.condition)
-              setWeatherTemp(data.temp)
-            },
-            (error) => {
-              console.error('위치 정보를 가져올 수 없습니다:', error)
-              setWeather('clear')
-            }
-          )
-        }
+        const response = await fetch(
+          `/api/weather?lat=${latitude}&lon=${longitude}`
+        )
+        const data = await response.json()
+        
+        setWeather(data.condition)
+        setWeatherTemp(data.temp)
       } catch (error) {
-        console.error('날씨 정보를 가져오는데 실패했습니다:', error)
+        console.error('위치/날씨 정보를 가져올 수 없습니다:', error)
         setWeather('clear')
       }
     }
@@ -144,15 +155,30 @@ export default function Home() {
   }
 
   const handleFindRestaurants = async () => {
-    if (!recommendedMenu || !userLocation) {
-      alert('위치 정보를 가져올 수 없습니다.')
-      return
-    }
+    if (!recommendedMenu) return
 
     try {
       setIsLoading(true)
+
+      // 버튼 클릭 시 위치 새로 측정 (캐시 없이 최신 GPS 좌표 사용)
+      let currentLocation = userLocation
+      try {
+        const position = await getAccurateLocation()
+        const { latitude, longitude } = position.coords
+        currentLocation = { lat: latitude, lon: longitude }
+        setUserLocation(currentLocation)
+        console.log('📍 가게 검색용 좌표:', latitude, longitude)
+      } catch (locError) {
+        console.warn('위치 재측정 실패, 기존 위치 사용:', locError)
+        if (!currentLocation) {
+          alert('위치 정보를 가져올 수 없습니다.')
+          setIsLoading(false)
+          return
+        }
+      }
+
       const response = await fetch(
-        `/api/restaurants?query=${encodeURIComponent(recommendedMenu.menu.name)}&lat=${userLocation.lat}&lon=${userLocation.lon}&sort=${sortBy}`
+        `/api/restaurants?query=${encodeURIComponent(recommendedMenu.menu.name)}&lat=${currentLocation.lat}&lon=${currentLocation.lon}&sort=${sortBy}`
       )
       const data = await response.json()
       
