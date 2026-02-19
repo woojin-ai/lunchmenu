@@ -13,22 +13,49 @@ export default function Header() {
           </span>
         </Link>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1">
           <Link
             href="/"
-            className="px-4 py-2 rounded-lg transition-all hover:bg-orange-500 hover:text-white text-gray-700 font-medium"
+            className="px-3 py-2 rounded-lg transition-all hover:bg-orange-500 hover:text-white text-gray-700 font-medium text-sm"
           >
-            <span className="mr-2">🍽️</span>
+            <span className="mr-1">🍽️</span>
             점심 추천
           </Link>
           <a
             href="https://16personality-type-test.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 rounded-lg transition-all hover:bg-purple-500 hover:text-white text-gray-700 font-medium flex items-center"
+            className="px-3 py-2 rounded-lg transition-all hover:bg-purple-500 hover:text-white text-gray-700 font-medium text-sm flex items-center"
           >
-            <span className="mr-2">🧠</span>
+            <span className="mr-1">🧠</span>
             MBTI
+          </a>
+          <a
+            href="https://saju-one-theta.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-2 rounded-lg transition-all hover:bg-yellow-500 hover:text-white text-gray-700 font-medium text-sm flex items-center"
+          >
+            <span className="mr-1">🔮</span>
+            사주팔자
+          </a>
+          <a
+            href="https://tarot-card-homepage.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-2 rounded-lg transition-all hover:bg-indigo-500 hover:text-white text-gray-700 font-medium text-sm flex items-center"
+          >
+            <span className="mr-1">🃏</span>
+            타로
+          </a>
+          <a
+            href="https://wj-portfolio.vercel.app/contact"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-2 rounded-lg transition-all hover:bg-teal-500 hover:text-white text-gray-700 font-medium text-sm flex items-center"
+          >
+            <span className="mr-1">📬</span>
+            Contact
           </a>
         </div>
       </nav>
