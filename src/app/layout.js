@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <head>
-        <meta name="naver-site-verification" content="4f1f97e8cd289c7eed2ae482c648ba2dd6bbb09" />
+        <meta name="naver-site-verification" content="41f97e8cd289cc7eed2ae4823c648ba2d46bbcb9" />
         <Script
           src="//t1.daumcdn.net/kas/static/ba.min.js"
           strategy="afterInteractive"
