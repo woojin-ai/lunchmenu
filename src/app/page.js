@@ -540,17 +540,15 @@ export default function Home() {
 
       {/* 푸터 */}
       <footer className="text-center mt-16 py-8 border-t border-gray-200">
-        {/* 하단 광고 배너 */}
-        <div className="max-w-4xl mx-auto mb-6">
-          <div className="flex justify-center">
-            <ins 
-              className="kakao_ad_area" 
-              style={{ display: 'block' }}
-              data-ad-unit="DAN-guy3kYiHqYjiO3b6"
-              data-ad-width="728"
-              data-ad-height="90"
-            />
-          </div>
+        {/* 하단 광고 배너 - 데스크탑만 표시 (728px은 모바일에서 깨짐) */}
+        <div className="hidden md:flex justify-center max-w-4xl mx-auto mb-6">
+          <ins 
+            className="kakao_ad_area" 
+            style={{ display: 'block' }}
+            data-ad-unit="DAN-guy3kYiHqYjiO3b6"
+            data-ad-width="728"
+            data-ad-height="90"
+          />
         </div>
 
         <div className="flex items-center justify-center gap-2 text-gray-500 text-sm mb-2">
